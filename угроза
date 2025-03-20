@@ -1,0 +1,481 @@
+1 угроза
+
+@startuml
+title "Сценарий 1. Нарушение работы из-за взлома системы связи"
+
+participant "Альфред" as alfred
+participant "Бэтмен" as batman
+participant "Система планирования в авто" as planning 
+participant "Навигационная система" as navigation 
+participant "Система управления движением" as motion_control 
+participant "Система безопасности" as security 
+participant "Система связи" as communication 
+participant "Логирование" as logging 
+participant "Автопилот Бэтмобиля" as autopilot 
+participant "Система диагностики" as diagnostics
+participant "Система жизнеобеспечения" as life_support
+participant "Система мониторинга" as monitoring
+participant "Система отчетности" as reporting
+participant "Система энергопотребления" as energy_management
+participant "Система управления критическими ситуациями" as crit_control
+participant "Система анализа данных" as data_analysis
+
+autonumber
+
+alfred -> planning: Запрос на планирование миссии
+planning -> navigation: <color:red>Получение текущих координат</color>
+navigation -> planning: <color:red>Текущие координаты (НО ОНИ ЛОЖНЫ)</color>
+planning -> navigation: <color:red>Расчет маршрута до цели</color>
+navigation -> planning: <color:red>Маршрут рассчитан (НО НЕПРАВИЛЬНО)</color>
+planning -> alfred: <color:red>Маршрут готов</color>
+alfred -> batman: Передача данных о миссии и маршруте
+batman -> planning: <color:red>Подтверждение маршрута</color>
+planning -> batman: <color:red>Маршрут подтвержден</color>
+
+batman -> motion_control: <color:red>Запуск движения по маршруту</color>
+motion_control -> autopilot: <color:red>Активация автопилота</color>
+autopilot -> motion_control: <color:red>Автопилот активирован</color>
+motion_control -> navigation: <color:red>Следование по маршруту (НО МАРШРУТ ЛОЖНЫЙ)</color>
+navigation -> motion_control: <color:red>Корректировка движения (НО НА НЕПРАВИЛЬНОМ МАРШРУТЕ)</color>
+motion_control -> security: <color:red>Проверка безопасности маршрута</color>
+security -> motion_control: <color:red>Маршрут безопасен (ОШИБОЧНО)</color>
+
+loop [Движение по ложному маршруту]
+    motion_control -> navigation: <color:red>Обновление данных о местоположении</color>
+    navigation -> motion_control: <color:red>Данные обновлены (НО ЛОЖНЫЕ)</color>
+    motion_control -> security: <color:red>Постоянный мониторинг безопасности</color>
+    security -> motion_control: <color:red>Угроз не обнаружено (ОШИБОЧНО)</color>
+    motion_control -> diagnostics: Проверка состояния систем
+    diagnostics -> motion_control: Все системы в норме
+    motion_control -> monitoring: Мониторинг окружающей среды
+    monitoring -> motion_control: Данные мониторинга
+    motion_control -> data_analysis: Анализ данных
+    data_analysis -> motion_control: Анализ завершен
+    motion_control -> batman: Отчет о текущем состоянии
+    batman -> motion_control: Команды на корректировку (при необходимости)
+end
+
+motion_control -> batman: <color:red>Прибытие в пункт назначения (НО НЕ ВЕРНОЕ)</color>
+batman -> communication: <color:red>Отчет о завершении миссии</color>
+communication -> reporting: <color:red>Формирование отчета (НА ОСНОВЕ ЛОЖНЫХ ДАННЫХ)</color>
+reporting -> communication: <color:red>Отчет готов (НО С ОШИБКАМИ)</color>
+communication -> logging: <color:red>Логирование завершения миссии</color>
+logging -> communication: <color:red>Логирование завершено (НО С ОШИБКАМИ)</color>
+communication -> alfred: <color:red>Отчет отправлен</color>
+alfred -> batman: Подтверждение завершения миссии (НО НЕ НАСТОЯЩЕЙ)
+@enduml
+
+
+2 угроза
+
+
+@startuml
+title "Сценарий 2. Нарушение работы из-за вируса-таймера в системе управления критическими ситуациями"
+
+participant "Альфред" as alfred
+participant "Бэтмен" as batman
+participant "Система планирования в авто" as planning 
+participant "Навигационная система" as navigation 
+participant "Система управления движением" as motion_control 
+participant "Система безопасности" as security 
+participant "Система связи" as communication 
+participant "Логирование" as logging 
+participant "Автопилот Бэтмобиля" as autopilot 
+participant "Система диагностики" as diagnostics
+participant "Система жизнеобеспечения" as life_support
+participant "Система мониторинга" as monitoring
+participant "Система отчетности" as reporting
+participant "Система энергопотребления" as energy_management
+participant "Система управления критическими ситуациями" as crit_control
+participant "Система анализа данных" as data_analysis
+
+autonumber
+
+alfred -> planning: Запрос на планирование миссии
+planning -> navigation: Получение текущих координат
+navigation -> planning: Текущие координаты
+planning -> navigation: Расчет маршрута до цели
+navigation -> planning: Маршрут рассчитан
+planning -> alfred: Маршрут готов
+alfred -> batman: Передача данных о миссии и маршруте
+batman -> planning: Подтверждение маршрута
+planning -> batman: Маршрут подтвержден
+
+batman -> motion_control: Запуск движения по маршруту
+motion_control -> autopilot: Активация автопилота
+autopilot -> motion_control: Автопилот активирован
+motion_control -> navigation: Следование по маршруту
+navigation -> motion_control: Корректировка движения
+motion_control -> security: Проверка безопасности маршрута
+security -> motion_control: Маршрут безопасен
+
+motion_control -> life_support: Проверка состояния систем жизнеобеспечения
+life_support -> motion_control: Все системы в норме
+
+motion_control -> energy_management: Проверка уровня энергии
+energy_management -> motion_control: Уровень энергии в норме
+
+motion_control -> crit_control: <color:red>Проверка критической ситуации</color>
+crit_control -> motion_control: <color:red>Система управления критическими ситуациями готова к использованию</color>
+
+loop [Движение по маршруту]
+    motion_control -> navigation: Обновление данных о местоположении
+    navigation -> motion_control: Данные обновлены
+    motion_control -> security: Постоянный мониторинг безопасности
+    security -> motion_control: Угроз не обнаружено
+    motion_control -> diagnostics: Проверка состояния систем
+    diagnostics -> motion_control: Все системы в норме
+    motion_control -> monitoring: Мониторинг окружающей среды
+    monitoring -> motion_control: Данные мониторинга
+    motion_control -> data_analysis: Анализ данных
+    data_analysis -> motion_control: Анализ завершен
+    motion_control -> batman: Отчет о текущем состоянии
+    batman -> motion_control: Команды на корректировку (при необходимости)
+
+    crit_control -> motion_control: <color:red>Активация катапультирования (ВИРУС-ТАЙМЕР СРАБОТАЛ!)</color>
+    motion_control -> batman: <color:red>ВНЕЗАПНАЯ ЭКСТРЕННАЯ ЭВАКУАЦИЯ</color>
+    motion_control -> life_support: <color:red>Отключение жизнеобеспечения</color>
+    life_support -> motion_control: <color:red>Системы отключены</color>
+    motion_control -> autopilot: <color:red>Отключение автопилота</color>
+    autopilot -> motion_control: <color:red>Автопилот отключен</color>
+    motion_control -> diagnostics: <color:red>Аварийная диагностика</color>
+    diagnostics -> motion_control: <color:red>Обнаружен несанкционированный запуск катапультирования</color>
+end
+
+motion_control -> batman: <color:red>Бэтмен катапультирован! Миссия провалена</color>
+batman -> communication: <color:red>Аварийное сообщение</color>
+communication -> reporting: <color:red>Формирование отчета об аварии</color>
+reporting -> communication: <color:red>Отчет готов</color>
+communication -> logging: <color:red>Логирование аварийной ситуации</color>
+logging -> communication: <color:red>Логирование завершено</color>
+communication -> alfred: <color:red>Сообщение о катапультировании отправлено</color>
+alfred -> batman: <color:red>Подтверждение аварии</color>
+@enduml
+
+угроза 3
+
+@startuml
+title "Сценарий 3. Нарушение работы из-за загрязнения фотоэлектрических датчиков"
+
+participant "Альфред" as alfred
+participant "Бэтмен" as batman
+participant "Система планирования в авто" as planning 
+participant "Навигационная система" as navigation 
+participant "Система управления движением" as motion_control 
+participant "Система безопасности" as security 
+participant "Система связи" as communication 
+participant "Логирование" as logging 
+participant "Автопилот Бэтмобиля" as autopilot 
+participant "Система диагностики" as diagnostics
+participant "Система жизнеобеспечения" as life_support
+participant "Система мониторинга" as monitoring
+participant "Система отчетности" as reporting
+participant "Система энергопотребления" as energy_management
+participant "Система обнаружения рисков критической реакции (СОРКР)" as risk_detection
+participant "Система управления критическими ситуациями" as crit_control
+participant "Система анализа данных" as data_analysis
+
+autonumber
+
+alfred -> planning: Запрос на планирование миссии
+planning -> navigation: Получение текущих координат
+navigation -> planning: Текущие координаты
+planning -> navigation: Расчет маршрута до цели
+navigation -> planning: Маршрут рассчитан
+planning -> alfred: Маршрут готов
+alfred -> batman: Передача данных о миссии и маршруте
+batman -> planning: Подтверждение маршрута
+planning -> batman: Маршрут подтвержден
+
+batman -> motion_control: Запуск движения по маршруту
+motion_control -> autopilot: Активация автопилота
+autopilot -> motion_control: Автопилот активирован
+motion_control -> navigation: Следование по маршруту
+navigation -> motion_control: Корректировка движения
+motion_control -> security: Проверка безопасности маршрута
+security -> motion_control: Маршрут безопасен
+
+motion_control -> life_support: Проверка состояния систем жизнеобеспечения
+life_support -> motion_control: Все системы в норме
+
+motion_control -> energy_management: Проверка уровня энергии
+energy_management -> motion_control: Уровень энергии в норме
+
+motion_control -> risk_detection: <color:red>Анализ окружающей среды на наличие угроз</color>
+risk_detection -> motion_control: <color:red>Запрос на фотоэлектрические данные</color>
+monitoring -> risk_detection: <color:red>Передача данных с фотоэлектрических датчиков</color>
+risk_detection -> crit_control: <color:red>АНАЛИЗ: ОПАСНОСТИ НЕ ОБНАРУЖЕНО (ДАТЧИКИ ЗАПАЧКАНЫ!)</color>
+
+loop [Движение по маршруту]
+    motion_control -> navigation: Обновление данных о местоположении
+    navigation -> motion_control: Данные обновлены
+    motion_control -> security: Постоянный мониторинг безопасности
+    security -> motion_control: Угроз не обнаружено
+    motion_control -> diagnostics: Проверка состояния систем
+    diagnostics -> motion_control: Все системы в норме
+    motion_control -> monitoring: Мониторинг окружающей среды
+    monitoring -> motion_control: Данные мониторинга
+    motion_control -> data_analysis: Анализ данных
+    data_analysis -> motion_control: Анализ завершен
+    motion_control -> batman: Отчет о текущем состоянии
+    batman -> motion_control: Команды на корректировку (при необходимости)
+    
+    risk_detection -> motion_control: <color:red>Датчики не зафиксировали угрозу</color>
+end
+
+motion_control -> batman: <color:red>НЕ ОТРАЖЕНА КРИТИЧЕСКАЯ ДЕТОНАЦИЯ!</color>
+motion_control -> crit_control: <color:red>Система катапультирования НЕ АКТИВИРОВАНА</color>
+motion_control -> life_support: <color:red>Жизнеобеспечение продолжает работу</color>
+
+batman -> communication: <color:red>Запрос на аварийное вмешательство</color>
+communication -> reporting: <color:red>Формирование отчета об ошибке</color>
+reporting -> communication: <color:red>Отчет готов</color>
+communication -> logging: <color:red>Логирование критической ошибки</color>
+logging -> communication: <color:red>Логирование завершено</color>
+communication -> alfred: <color:red>Сообщение о неудачной детонации</color>
+alfred -> batman: <color:red>Бэтмен в опасности!</color>
+@enduml
+
+4 угроза
+
+
+@startuml
+title "Сценарий 4. Ошибка маршрутизации — путь через толпу зевак"
+
+participant "Альфред" as alfred
+participant "Бэтмен" as batman
+participant "Система планирования в авто" as planning 
+participant "Навигационная система" as navigation 
+participant "Система управления движением" as motion_control 
+participant "Система безопасности" as security 
+participant "Система связи" as communication 
+participant "Логирование" as logging 
+participant "Автопилот Бэтмобиля" as autopilot 
+participant "Система диагностики" as diagnostics
+participant "Система жизнеобеспечения" as life_support
+participant "Система мониторинга" as monitoring
+participant "Система отчетности" as reporting
+participant "Система энергопотребления" as energy_management
+participant "Система управления критическими ситуациями" as crit_control
+participant "Система анализа данных" as data_analysis
+
+autonumber
+
+alfred -> planning: Запрос на планирование миссии
+planning -> navigation: <color:red>Запрос на оптимальный маршрут</color>
+navigation -> planning: <color:red>Маршрут найден (ошибочный, через толпу)</color>
+planning -> alfred: <color:red>Маршрут подтвержден</color>
+alfred -> batman: <color:red>Передача данных о миссии и маршруте</color>
+batman -> planning: Подтверждение маршрута
+planning -> batman: <color:red>Маршрут подтвержден (но он ошибочный!)</color>
+
+batman -> motion_control: Запуск движения по маршруту
+motion_control -> autopilot: Активация автопилота
+autopilot -> motion_control: Автопилот активирован
+motion_control -> navigation: Следование по маршруту
+navigation -> motion_control: <color:red>Корректировка движения (по ошибочному маршруту)</color>
+motion_control -> security: Проверка безопасности маршрута
+security -> motion_control: <color:red>Ошибка! Опасность для зевак!</color>
+
+motion_control -> crit_control: <color:red>Запрос на аварийное изменение маршрута</color>
+crit_control -> motion_control: <color:red>Маршрут зафиксирован, но опасность не учтена</color>
+
+loop [Движение по маршруту]
+    motion_control -> navigation: <color:red>Обновление данных о местоположении</color>
+    navigation -> motion_control: <color:red>Данные обновлены (но зеваки впереди!)</color>
+    motion_control -> security: <color:red>Мониторинг безопасности</color>
+    security -> motion_control: <color:red>Обнаружено препятствие — люди!</color>
+    motion_control -> diagnostics: Проверка состояния систем
+    diagnostics -> motion_control: Все системы в норме
+    motion_control -> monitoring: <color:red>Мониторинг окружающей среды</color>
+    monitoring -> motion_control: <color:red>Зарегистрирована толпа впереди</color>
+    motion_control -> data_analysis: Анализ данных
+    data_analysis -> motion_control: <color:red>Требуется экстренное изменение маршрута!</color>
+    motion_control -> batman: <color:red>Тревога! Люди на пути!</color>
+    batman -> motion_control: <color:red>Остановить или скорректировать маршрут!</color>
+end
+
+motion_control -> batman: <color:red>Аварийное торможение!</color>
+motion_control -> crit_control: <color:red>Катапультирование НЕ требуется</color>
+
+batman -> communication: <color:red>Запрос Альфреду о ситуации</color>
+communication -> reporting: <color:red>Формирование отчета о нарушении</color>
+reporting -> communication: <color:red>Отчет готов</color>
+communication -> logging: <color:red>Логирование ошибки маршрутизации</color>
+logging -> communication: <color:red>Логирование завершено</color>
+communication -> alfred: <color:red>Ошибка маршрута зафиксирована!</color>
+alfred -> batman: <color:red>Используйте ручное управление!</color>
+@enduml
+
+угроза 5
+
+@startuml
+title "Сценарий 5. Атака на систему управления движением — перегрев и детонация"
+
+participant "Альфред" as alfred
+participant "Бэтмен" as batman
+participant "Система планирования в авто" as planning 
+participant "Навигационная система" as navigation 
+participant "Система управления движением" as motion_control 
+participant "Система безопасности" as security 
+participant "Система связи" as communication 
+participant "Логирование" as logging 
+participant "Автопилот Бэтмобиля" as autopilot 
+participant "Система диагностики" as diagnostics
+participant "Система жизнеобеспечения" as life_support
+participant "Система мониторинга" as monitoring
+participant "Система отчетности" as reporting
+participant "Система энергопотребления" as energy_management
+participant "Система управления критическими ситуациями" as crit_control
+participant "Система анализа данных" as data_analysis
+
+autonumber
+
+alfred -> planning: Запрос на планирование миссии
+planning -> navigation: Получение текущих координат
+navigation -> planning: Текущие координаты
+planning -> navigation: Расчет маршрута до цели
+navigation -> planning: Маршрут рассчитан
+planning -> alfred: Маршрут готов
+alfred -> batman: Передача данных о миссии и маршруте
+batman -> planning: Подтверждение маршрута
+planning -> batman: Маршрут подтвержден
+
+batman -> motion_control: <color:red>Запуск движения по маршруту</color>
+motion_control -> autopilot: Активация автопилота
+autopilot -> motion_control: Автопилот активирован
+motion_control -> navigation: Следование по маршруту
+navigation -> motion_control: Корректировка движения
+motion_control -> security: Проверка безопасности маршрута
+security -> motion_control: Маршрут безопасен
+
+motion_control -> life_support: Проверка состояния систем жизнеобеспечения
+life_support -> motion_control: Все системы в норме
+
+motion_control -> energy_management: Проверка уровня энергии
+energy_management -> motion_control: Уровень энергии в норме
+
+motion_control -> crit_control: Проверка критической ситуации
+crit_control -> motion_control: Система управления критическими ситуациями готова к использованию
+
+== КИБЕРАТАКА НА СИСТЕМУ ДВИЖЕНИЯ ==
+actor "Хакер" as hacker
+hacker -> motion_control: <color:red>Эксплуатация уязвимости! Нарушение управления двигателем</color>
+motion_control -> energy_management: <color:red>Аномальное потребление энергии</color>
+energy_management -> motion_control: <color:red>Энергопотребление выходит за пределы нормы!</color>
+
+loop [Движение по маршруту с неисправностью]
+    motion_control -> diagnostics: <color:red>Проверка состояния систем</color>
+    diagnostics -> motion_control: <color:red>Обнаружено аномальное поведение двигателя</color>
+    motion_control -> monitoring: <color:red>Мониторинг перегрева</color>
+    monitoring -> motion_control: <color:red>Температура критическая!</color>
+    motion_control -> data_analysis: <color:red>Анализ данных о перегреве</color>
+    data_analysis -> motion_control: <color:red>Риск детонации!</color>
+    motion_control -> crit_control: <color:red>Требуется экстренное отключение двигателя!</color>
+    crit_control -> motion_control: <color:red>Отключение невозможно, управление заблокировано!</color>
+    motion_control -> batman: <color:red>Тревога! Реактивный двигатель перегревается!</color>
+    batman -> motion_control: <color:red>Попытка ручного отключения</color>
+end
+
+== КРИТИЧЕСКАЯ ОШИБКА ==
+
+motion_control -> crit_control: <color:red>Неустранимая неисправность! Срочная катапультация!</color>
+crit_control -> batman: <color:red>Активируем катапультирование!</color>
+batman -> crit_control: <color:red>Катапультирование подтверждено!</color>
+crit_control -> life_support: <color:red>Защита пилота при аварийном выходе</color>
+
+== ВЗРЫВ ==
+
+motion_control -> monitoring: <color:red>Реактивный двигатель детонировал!</color>
+monitoring -> security: <color:red>Аварийная ситуация!</color>
+security -> reporting: <color:red>Формирование отчета об инциденте</color>
+reporting -> communication: <color:red>Отправка отчета</color>
+communication -> logging: <color:red>Логирование катастрофического сбоя</color>
+logging -> communication: <color:red>Логирование завершено</color>
+communication -> alfred: <color:red>Бэтмен катапультирован! Машина уничтожена!</color>
+alfred -> batman: <color:red>Срочное спасение!</color>
+@enduml
+
+угроза 6
+@startuml
+title "Сценарий 6. Ошибка модуля навигации — передача неверных координат"
+
+participant "Альфред" as alfred
+participant "Бэтмен" as batman
+participant "Система планирования в авто" as planning
+participant "Навигационная система" as navigation
+participant "Система управления движением" as motion_control
+participant "Система безопасности" as security
+participant "Система связи" as communication
+participant "Логирование" as logging
+participant "Автопилот Бэтмобиля" as autopilot
+participant "Система диагностики" as diagnostics
+participant "Система жизнеобеспечения" as life_support
+participant "Система мониторинга" as monitoring
+participant "Система отчетности" as reporting
+participant "Система энергопотребления" as energy_management
+participant "Система управления критическими ситуациями" as crit_control
+participant "Система анализа данных" as data_analysis
+
+autonumber
+
+alfred -> planning: Запрос на планирование миссии
+planning -> navigation: <color:red>Получение текущих координат</color>
+navigation -> planning: <color:red>Передача НЕВЕРНЫХ координат!</color>
+planning -> navigation: <color:red>Расчет маршрута до цели (по ошибочным данным)</color>
+navigation -> planning: <color:red>Маршрут рассчитан (с ошибкой)</color>
+planning -> alfred: <color:red>Маршрут готов (но он неверный!)</color>
+alfred -> batman: Передача данных о миссии и маршруте
+batman -> planning: Подтверждение маршрута
+planning -> batman: <color:red>Маршрут подтвержден (ошибочный)</color>
+
+batman -> motion_control: <color:red>Запуск движения по маршруту</color>
+motion_control -> autopilot: Активация автопилота
+autopilot -> motion_control: Автопилот активирован
+motion_control -> navigation: <color:red>Следование по маршруту (ошибочному)</color>
+navigation -> motion_control: <color:red>Корректировка движения (на основе неверных данных)</color>
+motion_control -> security: Проверка безопасности маршрута
+security -> motion_control: <color:red>Маршрут безопасен (анализируется ложная траектория)</color>
+
+motion_control -> life_support: Проверка состояния систем жизнеобеспечения
+life_support -> motion_control: Все системы в норме
+
+motion_control -> energy_management: Проверка уровня энергии
+energy_management -> motion_control: Уровень энергии в норме
+
+motion_control -> crit_control: Проверка критической ситуации
+crit_control -> motion_control: Система управления критическими ситуациями готова к использованию
+
+== ДВИЖЕНИЕ ПО ОШИБОЧНОМУ МАРШРУТУ ==
+
+loop [Движение по маршруту с неверными координатами]
+    motion_control -> navigation: <color:red>Обновление данных о местоположении (на основе ошибочных данных)</color>
+    navigation -> motion_control: <color:red>Передача ложных данных о позиции</color>
+    motion_control -> security: Постоянный мониторинг безопасности
+    security -> motion_control: <color:red>Угроз не обнаружено (анализируется неверный маршрут)</color>
+    motion_control -> diagnostics: Проверка состояния систем
+    diagnostics -> motion_control: Все системы в норме
+    motion_control -> monitoring: Мониторинг окружающей среды
+    monitoring -> motion_control: <color:red>Данные мониторинга (противоречат навигации!)</color>
+    motion_control -> data_analysis: Анализ данных
+    data_analysis -> motion_control: <color:red>Обнаружено несоответствие навигации и сенсоров!</color>
+    motion_control -> batman: <color:red>Отчет о текущем состоянии (с аномалиями)</color>
+    batman -> motion_control: <color:red>Команды на корректировку (не учитывают реальное местоположение)</color>
+end
+
+== ПОТЕНЦИАЛЬНЫЕ ПОСЛЕДСТВИЯ ==
+
+motion_control -> batman: <color:red>Ошибка навигации! Высокий риск сбоя!</color>
+batman -> crit_control: <color:red>Переход в режим ручного управления!</color>
+crit_control -> motion_control: <color:red>Ручное управление активировано!</color>
+
+== ЛОГИРОВАНИЕ ==
+
+motion_control -> logging: <color:red>Запись ошибки навигации</color>
+logging -> reporting: <color:red>Формирование отчета о сбое</color>
+reporting -> communication: <color:red>Отправка отчета Альфреду</color>
+communication -> alfred: <color:red>Навигационный сбой зафиксирован</color>
+alfred -> batman: <color:red>Требуется корректировка маршрута!</color>
+
+@enduml
+
