@@ -53,7 +53,7 @@
 
 Базовая архитектура
 
-![image](https://github.com/user-attachments/assets/081375dc-7e36-454a-94cf-fed0f0815a17)
+![image](https://github.com/user-attachments/assets/400a8a11-6906-48d9-932d-d2b4b3e4e837)
 
 
 Базовая диаграмма последовательности
