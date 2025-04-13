@@ -1,0 +1,37 @@
+services:
+
+  planning_system:
+    build: ./planning_system/
+    image: planning_system
+    container_name: planning_system
+    ports:
+    
+      - 8002:8000
+    environment:
+      - SERVICE_NAME=planning_system
+      - NEXT_SERVICE_URL=http://calculating_path:8001/calc
+      - PORT=8000
+
+
+  calculating_path:
+    build: ./calculating_path/
+    image: calculating_path
+    container_name: calculating_path
+    ports:
+      - 8000:8001
+    environment:
+      - SERVICE_NAME=calculating_path
+      - NEXT_SERVICE_URL=http://autopilot:8002/report
+      - PORT=8001
+
+
+  autopilot:
+    build: ./autopilot/
+    image: autopilot
+    container_name: autopilot
+    ports:
+      - 8001:8002
+    environment:
+      - SERVICE_NAME=autopilot
+      - NEXT_SERVICE_URL=http://planning_system:8000/task
+      - PORT=8002
