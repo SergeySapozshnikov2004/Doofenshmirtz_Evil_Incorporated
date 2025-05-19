@@ -52,8 +52,8 @@
 ### Компоненты
 
 Базовая архитектура
+![image](https://github.com/user-attachments/assets/8cbf679f-4e65-40ee-a163-4bfdd83906d4)
 
-![image](https://github.com/user-attachments/assets/400a8a11-6906-48d9-932d-d2b4b3e4e837)
 
 
 Базовая диаграмма последовательности
