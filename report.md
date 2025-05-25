@@ -132,7 +132,7 @@
 ![image](https://github.com/user-attachments/assets/6d048635-3587-4bcd-ac8b-3ec11344eb54)
 
 
-##Переработанная архитектура##
+## Переработанная архитектура ##
 ![image](https://github.com/user-attachments/assets/f436ada5-8a71-42b4-b0be-de39413b8962)
 
 Описание декомпозиции
