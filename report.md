@@ -229,9 +229,25 @@
 |Алгоритм построения маршрута|||
 
 
+### Диаграмма последовательности
 
+#### Выполнения задания
+![image](https://github.com/user-attachments/assets/ac4a4217-15b0-4054-94c7-a8d8e825b55e)
 
+#### Контроллер для расчета оптимального пути
+![image](https://github.com/user-attachments/assets/9a23be18-04ae-47fb-a80d-c63b75882de9)
 
+#### Датчики
+![image](https://github.com/user-attachments/assets/abecceaf-88f2-4832-aab9-2ec3a9326ff0)
+
+## Указание "доверенных компонент" на архитектурной диаграмме
+![image](https://github.com/user-attachments/assets/3a3a1d00-5337-4283-9a79-003ed1594cb5)
+
+#### Таблица доверенных компонентов
+
+|Компонент|Уровень доверия|Обоснование|Комментарий|
+|:--|:--|:--|:--|
+|1. Связь|$\textcolor{red}{\textsf{Недоверенный}}$|||
 
 
 
